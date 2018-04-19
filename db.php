@@ -25,7 +25,7 @@ try{
 		
 
 		function getItem($name){
-			$conn = new PDO('mysql:host=localhost;dbname=question4;charset=utf8mb4','root','root');
+		$conn = new PDO('mysql:host=localhost;dbname=question4;charset=utf8mb4','root','root');
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
 			// $conn->exec("SET names utf8");
@@ -37,6 +37,49 @@ try{
 		    );
 		    $result=$stmt->fetch();
 		    return $result;
+		}
+
+		function deleteItem($name){
+		$conn = new PDO('mysql:host=localhost;dbname=question4;charset=utf8mb4','root','root');
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		$sql = "DELETE FROM Q4 WHERE iterm_name = :name";
+		$stmt=$conn->prepare($sql);
+		$stmt->execute(
+		    	array(
+		    		':name'=>$name
+		    	)
+		    );
+		    return "Record deleted successfully";	
+		}
+
+		function updateItem($name,$quantity){
+		$conn = new PDO('mysql:host=localhost;dbname=question4;charset=utf8mb4','root','root');
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "UPDATE Q4 SET quantity=:quantity WHERE iterm_name = :name";
+			
+		    $stmt = $conn->prepare($sql);
+		    $stmt->execute(
+		    	array(
+		    		':name'=>$name,
+		    		':quantity'=>$quantity
+		    	)
+		    );
+		    echo $stmt->rowCount() . " records UPDATED successfully";
+		}
+
+
+		function addItem($num,$name, $quantity){
+		$stmt=$conn->prepare("INSERT INTO Q4 (iterm_num, iterm_name, quantity) VALUES (:num, :name, :quantity)
+			");
+		$result=$stmt->execute(
+		array(
+			':num'=>$num,
+			':name'=>$name,
+			':quantity'=>$quantity
+			)
+		);
+		return $result;
 		}
 	
 
