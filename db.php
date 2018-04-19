@@ -22,12 +22,13 @@
 // 	} 
 
 try{
-		$conn = new PDO('mysql:host=localhost;dbname=question4;charset=utf8mb4','root','root');
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
 
 		function getItem($name){
+			$conn = new PDO('mysql:host=localhost;dbname=question4;charset=utf8mb4','root','root');
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
-			$conn->exec("SET names utf8");
+			// $conn->exec("SET names utf8");
 		    $stmt = $conn->prepare("SELECT quantity FROM Q4 where iterm_name = :name"); 
 		    $stmt->execute(
 		    	array(
@@ -46,9 +47,7 @@ try{
 	$conn = null;
 
 
-
-
-
+	
 
 
 

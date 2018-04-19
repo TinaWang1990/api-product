@@ -75,23 +75,23 @@
   $(document).ready(function(){
     $("#select").click(function(){
       var name=$("input[name='name']").val();
-      // $.get(
-      //   "api/"+name,//注意相对路径
-      //   function(data){
-      //     $('h3').html(data.data);
-      //   }
-      //   )
-      $.ajax({
-        url:"api.php",
-        data:{
-          name:name,
-        },
-        type:"POST",
-        datatype:"json",
-        success:function(data){
-         $('h3').html(data);
-       }
-       });
+      $.get(
+        "api/"+name,//注意相对路径
+        function(data){
+          $('h3').html(data.quantity);
+        }
+        )
+      // $.ajax({
+      //   url:"api.php",
+      //   data:{
+      //     name:name,
+      //   },
+      //   type:"POST",
+      //   datatype:"json",
+      //   success:function(data){
+      //    $('h3').html(data.quantity);
+      //  }
+      //  });
     });
 
 
